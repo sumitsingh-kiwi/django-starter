@@ -12,6 +12,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
+from web_admin.constants import PROJECT_DIR
 from web_admin.forms import DownloadProjectForm
 
 
@@ -34,8 +35,13 @@ class DownloadProjectView(View):
             messages.add_message(request, messages.ERROR, 'Something went wrong')
             return redirect(reverse('download-project'))
         project_name, time_stamp = request.POST['project_name'], datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+
+        notification = 'true' if request.POST.get('notification', False) else 'false'
+
+        project_dir = PROJECT_DIR[request.POST['auth_type'] + "-" + notification]
+
         # call the shell script
-        os.system('./create_project.sh django_oauth2_example {} {}'.format(project_name, time_stamp))
+        os.system('./create_project.sh {} {} {}'.format(project_dir, project_name, time_stamp))
 
         path_to_file = '/tmp/{}{}.zip'.format(project_name, time_stamp)
         zip_file = open(path_to_file, 'rb')

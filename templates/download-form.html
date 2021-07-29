@@ -29,8 +29,8 @@
         <td>Authentication Type: </td>
         <td>
             <select name="auth_type" id="auth-type" required>
+                <option id="auth" value="auth"> Oauth2 </option>
                 <option id="jwt" value="jwt"> JWT </option>
-                <option id="auth" value="auth2"> Oauth2 </option>
             </select>
         </td>
     </tr>
@@ -39,7 +39,7 @@
             Include Notification Module:
         </td>
         <td>
-            <input type="checkbox" name="notification" />
+            <input type="radio" name="notification" />
         </td>
     </tr>
     </table>

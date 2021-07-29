@@ -6,4 +6,3 @@ cd /tmp
 mv $2$3/$1 $2$3/$2
 zip -r $2$3.zip $2$3
 rm -r $2$3
-echo 'rm '$2$3'.zip' | at now + 1 minutes

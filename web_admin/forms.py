@@ -8,5 +8,5 @@ class DownloadProjectForm(forms.Form):
     """ used to validate the input from the user """
 
     project_name = forms.CharField(max_length=30)
-    auth_type = forms.ChoiceField(choices=(('jwt', 'jwt'), ('auth', 'auth')))
-    notification_module = forms.BooleanField(required=False)
+    auth_type = forms.ChoiceField(choices=(('auth', 'auth'), ('jwt', 'jwt')))
+    notification = forms.BooleanField(required=False)

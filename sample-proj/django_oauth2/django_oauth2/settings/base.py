@@ -46,14 +46,11 @@ THIRD_PARTY_APPS = [
     'oauth2_provider',
     'rest_framework',
     'storages',
-    # only if you required push notifications
-    'fcm_django',
 ]
 
 LOCAL_APPS = [
     'apps.accounts',
     'apps.utility',
-    'apps.notifications',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -236,11 +233,11 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 # CELERY SETUP
-# CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
-# CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
-# CELERY_ACCEPT_CONTENT = ['application/json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 # email settings
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')

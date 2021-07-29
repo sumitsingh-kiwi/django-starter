@@ -11,7 +11,7 @@ from rest_framework.viewsets import GenericViewSet, mixins
 # local imports
 from apps.accounts.messages import SUCCESS_CODE
 from apps.accounts.serializers.auth import LoginSerializer, RegisterSerializer, UserDetailSerializer, LogoutSerializer
-from apps.accounts.tests.auth import logout
+from apps.accounts.tasks.auth import logout
 
 USER = get_user_model()
 
@@ -56,8 +56,8 @@ class LogoutViewSet(GenericViewSet, mixins.CreateModelMixin):
         """
         serializer = self.get_serializer_class()(data=request.data)
         serializer.is_valid(raise_exception=True)
-        logout(request.user.id, request.META['HTTP_AUTHORIZATION'].split(" ")[1],
-               request.data.get('registration_id', ""))
+        logout.delay(request.user.id, request.META['HTTP_AUTHORIZATION'].split(" ")[1],
+                     request.data.get('registration_id', ""))
         return Response({'message': SUCCESS_CODE["2000"], 'data': None},
                         status=status.HTTP_200_OK)
 

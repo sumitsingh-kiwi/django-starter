@@ -1,0 +1,15 @@
+{% extends 'common/base.html' %}
+{% block extra_head %}
+    <title>Login</title>
+    <script src="/static/js/login.js"></script>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'web_admin:v1:login' %}" method="post" name="login_form">
+        {% csrf_token %}
+        <input type="email" name="email" id="email" placeholder="email@example.com"/>
+        <input type="password" name="password" id="password" placeholder="Password"/>
+        <input type="submit" name="Login"/>
+    </form>
+    <a href="{% url 'web_admin:v1:forgot-password' %}">Forgot password?</a>
+{% endblock %}

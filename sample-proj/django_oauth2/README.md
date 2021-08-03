@@ -12,6 +12,9 @@
     > python manage.py makemigrations accounts --name=migrations
 * and now time to migrate the changes
     > python manage.py migrate
-* Please set the ROOT_URLCONF variable in settings > base.py according to your project name
 * then run the server
     > python manage.py runserver
+
+### Note
+* Please set the ROOT_URLCONF variable in settings > base.py according to your project name
+* to use docker, please do the required changes(project-name) in command section of each container section 

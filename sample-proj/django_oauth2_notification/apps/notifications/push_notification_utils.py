@@ -4,10 +4,9 @@ push notification utils
 # django imports
 from celery import shared_task
 from django.contrib.auth import get_user_model
-
-# local imports
 from fcm_django.models import FCMDevice
 
+# local imports
 from apps.notifications.models import NotificationType, Notification
 
 USER = get_user_model()
@@ -49,4 +48,3 @@ def send_notification(notification_type, from_user_id, to_user_id, extra_data):
     if notification_type_obj.send_push:
         data.update({'badge': Notification.objects.filter(notification_to=to_user, is_read=False).count()})
         to_user.send_push(data)
-

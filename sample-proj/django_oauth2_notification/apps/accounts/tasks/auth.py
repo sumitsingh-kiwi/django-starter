@@ -20,9 +20,9 @@ def logout(user_id, access_token, registration_id):
     try:
         LOGGER.info("going to logout user with id-{id}".format(id=user_id))
         user = USER.objects.get(pk=user_id)
-        # remove this if not using push notifications
-        user.fcmdevice_set.filter(registration_id=registration_id).update(active=False)
         user.oauth2_provider_accesstoken.filter(token=access_token).delete()
+        # remove user's push tokens
+        user.fcmdevice_set.filter(registration_id=registration_id).update(active=False)
         LOGGER.info("user logged-out successfully")
     except Exception as e:
         LOGGER.error(e)

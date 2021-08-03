@@ -10,7 +10,7 @@ function formValidation(){
       project_name: {required: true, maxlength: 30, projectNameValidation: true},
     },
     messages: {
-        first_name: {maxlength: "Not more than 30 Char are allowed"},
+        project_name: {maxlength: "Not more than 30 Char are allowed"},
     },
     // Specify validation error messages
     highlight: function(element, errorClass, validClass) {

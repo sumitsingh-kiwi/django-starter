@@ -7,5 +7,5 @@ FIXTURES = {
 }
 
 EMAIL_CONTENT = {
-    'forgot-link': "auth/forgot-password.html",
+    'forgot-link': {"template_name": "auth/forgot-password-email.html", 'subject': "Forgot Password Link"},
 }

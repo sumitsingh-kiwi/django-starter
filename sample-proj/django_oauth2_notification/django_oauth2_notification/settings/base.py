@@ -46,13 +46,13 @@ THIRD_PARTY_APPS = [
     'oauth2_provider',
     'rest_framework',
     'storages',
-    # only if you required push notifications
     'fcm_django',
 ]
 
 LOCAL_APPS = [
     'apps.accounts',
     'apps.utility',
+    'apps.web_admin',
     'apps.notifications',
 ]
 
@@ -143,6 +143,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join('accounts', 'static'),
+)
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static')
 
 MEDIA_URL = "/media/"
@@ -250,3 +253,11 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 FROM_EMAIL = os.getenv('FROM_EMAIL')
+
+FRONT_END_URL = os.getenv('FRONT_END_URL')
+MY_URL = os.getenv('MY_URL')
+
+# fcm settings
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": os.getenv('FCM_KEY')
+}

@@ -29,8 +29,6 @@ def send_email(mail_type, data, frontend_url=None):
     else:
         data.update({'frontend_url': frontend_url})
 
-    data.update({'admin_email': settings.SUPER_ADMIN_EMAIL})
-
     email_content = EMAIL_CONTENT[mail_type]
     subject = email_content['subject']
 
@@ -39,7 +37,7 @@ def send_email(mail_type, data, frontend_url=None):
 
     email_host = settings.FROM_EMAIL
     try:
-        send_mail(subject, data['message'], email_host, data['to_user'], html_message=html_message)
+        send_mail(subject, data.get('message', ""), email_host, [data['to_user']], html_message=html_message)
         return True
     except SMTPException as e:
         logger.exception("Sending Mail Exception : {}".format(str(e)))

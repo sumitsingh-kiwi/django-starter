@@ -1,9 +1,11 @@
 """
 auth serializer file
 """
+# django imports
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+# local imports
 from apps.accounts.messages import ERROR_CODE, SUCCESS_CODE
 
 USER = get_user_model()
@@ -87,3 +89,35 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = USER
         fields = ('id', 'first_name', 'last_name', 'profile_picture')
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    """
+    forgot password serializer.
+    """
+    email = serializers.CharField(required=True)
+
+    def validate(self, attrs):
+        """
+        :param attrs: data to be validated
+        """
+        user_obj = USER.objects.filter(email__iexact=attrs['email']).first()
+        if not user_obj:
+            raise serializers.ValidationError({"detail": ERROR_CODE['4001']})
+        if not user_obj.is_verified:
+            raise serializers.ValidationError({"detail": ERROR_CODE["4005"]})
+        if not user_obj.is_active:
+            raise serializers.ValidationError({"detail": ERROR_CODE["4003"]})
+
+        self.context.update({'user': user_obj})
+        return attrs
+
+    def create(self, validated_data):
+        """ send forgot password link """
+        user = self.context['user']
+        user.send_forgot_pass_mail()
+        return user
+
+    def to_representation(self, instance):
+        """ string representation """
+        return {'detail': SUCCESS_CODE}

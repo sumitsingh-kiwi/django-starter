@@ -1,5 +1,5 @@
 """
-     Qasettings
+     Qa settings
 """
 # python imports
 from os import path

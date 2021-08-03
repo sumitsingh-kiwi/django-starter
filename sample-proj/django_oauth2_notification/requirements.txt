@@ -31,6 +31,3 @@ django-rest-swagger==2.2.0
 
 # pillow
 pillow==8.3.1
-
-# fcm django
-fcm-django==1.0.1

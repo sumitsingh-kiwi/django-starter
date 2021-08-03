@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('apps.accounts.urls.urls', 'account'), namespace='account')),
     path('', include(('apps.utility.urls.urls', 'utility'), namespace='utility')),
+    path('', include(('apps.web_admin.urls.urls', 'web_admin'), namespace='web_admin')),
     path('api-doc/', schema_view.with_ui('swagger', cache_timeout=0)),
 ]
 

@@ -7,6 +7,7 @@ from rest_framework import serializers
 # local imports
 from apps.accounts.serializers.auth import UserDetailSerializer
 from apps.notifications.models import Notification, NotificationType
+from apps.notifications.push_notification_utils import register_fcm_token
 
 
 class NotificationTypeSerializer(serializers.ModelSerializer):

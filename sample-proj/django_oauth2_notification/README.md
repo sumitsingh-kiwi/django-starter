@@ -1,4 +1,4 @@
-# ready to use Django Project with Oauth2/Email-settings/celery-settings/push-notifications
+# ready to use Django Project with Oauth2/Email-settings/celery-settings
 
 ## Steps to use this project:
 
@@ -12,7 +12,10 @@
     > python manage.py makemigrations accounts --name=migrations
 * and now time to migrate the changes
     > python manage.py migrate
-* Please set the ROOT_URLCONF variable in settings > base.py according to your project name
 * then run the server
     > python manage.py runserver
-    > python manage.py loaddata fixtures/notification_type.json
+
+
+### Note
+* Please set the ROOT_URLCONF variable in settings > base.py according to your project name
+* to use docker, please do the required changes(project-name) in command section of each container section 

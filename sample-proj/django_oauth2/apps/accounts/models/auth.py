@@ -1,7 +1,12 @@
 """
 models file
 """
+# python imports
+import random
+import string
+
 # django imports
+from django.conf import settings
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -13,6 +18,7 @@ from oauthlib.common import generate_token
 # local imports
 from apps.accounts.choices import GENDER
 from apps.accounts.managers import UserManager
+from apps.utility.mails import send_email
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -35,6 +41,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_verified = models.BooleanField(default=False)
     verification_token = models.CharField(max_length=20, blank=True, null=True)
     verification_token_created_at = models.DateTimeField(null=True, blank=True)
+    forgot_pass_token = models.CharField(max_length=20, blank=True, null=True)
+    forgot_pass_token_created_at = models.DateTimeField(null=True, blank=True)
 
     objects = UserManager()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -54,6 +62,13 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.user_name = self.email
             
         super(User, self).save(*args, **kwargs)
+
+    @property
+    def full_name(self):
+        name = ""
+        name += self.first_name if self.first_name else ""
+        name += " {}".format(self.last_name) if self.last_name else ""
+        return name
 
     def create_application(self):
         """
@@ -77,3 +92,12 @@ class User(AbstractBaseUser, PermissionsMixin):
             'expires_in': oauth2_settings.ACCESS_TOKEN_EXPIRE_SECONDS,
         }
         return token
+
+    def send_forgot_pass_mail(self):
+        """ used to send forgot password link on email """
+        token = ''.join(random.choice(string.ascii_lowercase) for _ in range(10))
+        self.forgot_pass_token = token
+        self.forgot_pass_token_created_at = timezone.now()
+        self.save()
+        data = {'token': token, 'name': self.full_name, "to_user": self.email}
+        send_email.delay("forgot-link", data, frontend_url=settings.MY_URL)

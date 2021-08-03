@@ -3,9 +3,9 @@ constants file
 """
 
 FIXTURES = {
-    '1': "fixtures/superuser.json"
+    '1': "fixtures/notification_type.json"
 }
 
 EMAIL_CONTENT = {
-    'forgot-link': "auth/forgot-password.html",
+    'forgot-link': {"template_name": "auth/forgot-password-email.html", 'subject': "Forgot Password Link"},
 }

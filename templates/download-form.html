@@ -19,6 +19,7 @@
 </ul>
 {% endif %}
 <div class="container center">
+    <h1 class="header">Django Starter</h1>
     <form name="download-project" action="{% url 'download-project' %}" method="post">
         {% csrf_token %}
         <div class="row">
@@ -53,5 +54,69 @@
         </div>
     </form>
 </div>
+
+<div class="container center">
+
+    <div>
+        <p>How to run the downloaded project:</p>
+    </div>
+    <div>
+        <ul>
+            <li>
+                Download the zip folder and extract it.
+            </li>
+            <li>
+                Create python3.8 environment and activate it.
+            </li>
+            <li>
+                Install the requirements.txt file.
+            </li>
+            <li>
+                Run the makemigrations command & then migrate.
+            </li>
+            <li>
+                Run the server using python manage.py runserver.
+            </li>
+
+        </ul>
+    </div>
+    <div>
+        <p>
+            There are some other features also that you can use:
+        </p>
+        <ul>
+            <li>
+                If you want to show the tool-tip error messages in web-admin panel,<br>
+                use the showError("error message") function in js.
+            </li>
+            <li>
+                If you want to show the tool-tip success messages in web-admin panel,<br>
+                use the showSuccess("success message") function in js.
+            </li>
+            <li>
+                There is a preLoaded confirmation-modal in the templates > common > confirmation-modal.html.<br>
+                just include that file in your html file and use it as follows:<br>
+
+                $("#confirmation-modal-title").html("Logout");<br>
+                $("#confirmation-modal-description").html("Are you sure want to logout?");<br>
+                $("#confirmation-modal-yes-button").attr("onClick", "logout()");<br>
+                $("#confirmation-modal-yes-button").html("Yes");<br>
+                $("#confirmation-modal-no-button").html("Cancel");<br>
+                $("#deactivate-customer").modal('show');
+            </li>
+            <li>
+                To show the loader, use showLoader();<br>
+                To hide the loader, use hideLoader();
+            </li>
+            <li>
+                To hide the success/error tooltips, use preLoaded function timeOut(); <br>
+                The default timeout is 4500 you can change it in apps > web_admin > static > js > common.js > timeOut()
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+
 </body>
 </html>

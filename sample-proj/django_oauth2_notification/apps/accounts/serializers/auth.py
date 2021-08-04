@@ -40,7 +40,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         """ used to return the user json """
-        return {'token': instance.get_token()}
+        return {'token': instance.get_token(), 'id': instance.id}
 
 
 class RegisterSerializer(serializers.ModelSerializer):

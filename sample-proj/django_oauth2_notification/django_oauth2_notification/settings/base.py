@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'django_oauth2_example.urls'
+ROOT_URLCONF = '{}.urls'.format(os.getenv('SETTINGS').split(".")[0])
 
 TEMPLATES = [
     {

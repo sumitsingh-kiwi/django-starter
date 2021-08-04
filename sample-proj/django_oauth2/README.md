@@ -16,5 +16,4 @@
     > python manage.py runserver
 
 ### Note
-* Please set the ROOT_URLCONF variable in settings > base.py according to your project name
 * to use docker, please do the required changes(project-name) in command section of each container section 

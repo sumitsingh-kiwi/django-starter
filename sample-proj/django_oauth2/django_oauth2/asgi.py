@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_oauth2_example.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.getenv('SETTINGS'))
 
 application = get_asgi_application()

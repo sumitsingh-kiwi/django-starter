@@ -85,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_oauth2_example.wsgi.application'
+WSGI_APPLICATION = '{}.wsgi.application'.format(os.getenv('SETTINGS').split(".")[0])
 
 
 # Database

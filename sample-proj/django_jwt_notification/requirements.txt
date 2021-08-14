@@ -1,0 +1,35 @@
+# django
+django==3.2.5
+
+# psycopg2 module
+psycopg2-binary==2.9.1
+
+#dotenv
+python-dotenv==0.18.0
+
+#rest framework
+djangorestframework==3.12.4
+
+# for rest swagger
+drf-yasg==1.20.0
+
+# django storages
+django-storages==1.11.1
+
+# celery
+celery==5.1.2
+
+# cors header
+django-cors-headers==3.7.0
+
+# rest swagger
+django-rest-swagger==2.2.0
+
+# pillow
+pillow==8.3.1
+
+# jwt
+djangorestframework-simplejwt==4.7.1
+
+# fcm django
+fcm-django==1.0.1

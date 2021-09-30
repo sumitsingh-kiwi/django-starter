@@ -1,0 +1,39 @@
+version: '2'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "8002:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - .:/usr/src/app
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: django
+    restart: always
+    command: bash -c "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && gunicorn project_settings.wsgi -b 0.0.0.0:80"
+    volumes:
+      - .:/usr/src/app
+    expose:
+      - "80"
+  broker:
+    image: rabbitmq:3
+    container_name: stage_rabbitmq
+    ports:
+      - 5675:5673
+    volumes:
+      - .:/usr/src/app
+  worker:
+    build: .
+    image: celery
+    container_name: stage_celery
+    restart: "always"
+    command: bash -c "celery -A django_oauth2_example worker -B -l DEBUG"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - broker

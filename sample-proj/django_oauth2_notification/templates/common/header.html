@@ -1,0 +1,4 @@
+<h5>This is Header</h5>
+<a href="javascript:logoutConfirm();">Logout</a>
+<form action="{% url 'web_admin:v1:logout' %}" name="logout-form"></form>
+{% include 'common/confirmation-modal.html' %}

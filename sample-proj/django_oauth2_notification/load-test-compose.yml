@@ -22,7 +22,7 @@ services:
       - "80"
   broker:
     image: rabbitmq:3
-    container_name: stage_rabbitmq
+    container_name: loadtest_rabbitmq
     ports:
       - 5675:5673
     volumes:
@@ -30,7 +30,7 @@ services:
   worker:
     build: .
     image: celery
-    container_name: stage_celery
+    container_name: loadtest_celery
     restart: "always"
     command: bash -c "celery -A django_oauth2_example worker -B -l DEBUG"
     volumes:

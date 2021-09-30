@@ -15,7 +15,7 @@ services:
     build: .
     container_name: django
     restart: always
-    command: bash -c "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && gunicorn django_oauth2_example.wsgi --workers=20 --threads=20 --worker-connections=1024 -b 0.0.0.0:80"
+    command: bash -c "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && gunicorn project_settings.wsgi --workers=20 --threads=20 --worker-connections=1024 -b 0.0.0.0:80"
     volumes:
       - .:/usr/src/app
     expose:

@@ -18,3 +18,6 @@ celerybeat-schedule
 .scannerwork/
 /migrations/*
 db.sqlite3
+sample-proj/django_oauth2_notification
+sample-proj/django_jwt_notification
+sample-proj/django_jwt

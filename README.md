@@ -1,6 +1,6 @@
-# ready to use Django Project
+## Steps to setup the project:
 
-## Steps to use this project:
+### Manual setup
 
 * create a python3.8 environment and activate it
 * inside the main directory, create a .env file as follow and then edit the value according to the need
@@ -15,27 +15,32 @@
 * then run the server
     > python manage.py runserver
 
+### Docker Setup
 
-####There are some other features also that you can use:
+#### Create env file:-  
+ create .env file parallel to .env_sample and change the values accordingly.
 
-* If you want to show the tool-tip error messages in web-admin panel, use the **showError("error message")** 
-  function in js.
+#### Install docker and docker composer:
+[https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
-* If you want to show the tool-tip success messages in web-admin panel, use the **showSuccess("success message")** 
-  function in js.
-
-* There is a preLoaded **confirmation-modal** in the templates > common > confirmation-modal.html.<br>
-  just include that file in your html file and use it as follows:
-
-  > $("#confirmation-modal-title").html("Logout");<br>
-  > $("#confirmation-modal-description").html("Are you sure want to logout?");<br>
-  > $("#confirmation-modal-yes-button").attr("onClick", "logout()");<br>
-  > $("#confirmation-modal-yes-button").html("Yes");<br>
-  > $("#confirmation-modal-no-button").html("Cancel");<br>
-  > $("#deactivate-customer").modal('show');<br>
-                
-* To show the loader, use **showLoader();**<br>
-  To hide the loader, use **hideLoader();**
-  
-* To hide the **success/error** tooltips, use preLoaded function **timeOut()**; <br>
-  The default timeout is 4500 you can change it in apps > web_admin > static > js > common.js > timeOut()
+[https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
+###### 1: Production Environment 
+	docker-compose -f docker-compose.yml up -d --build
+###### 2: Development Environment
+	docker-compose -f docker-compose-dev.yml up -d --build
+###### 3: Qa Environment
+	docker-compose -f docker-compose-qa.yml up -d --build
+###### 4: Staging Environment
+	docker-compose -f docker-compose-staging.yml up -d --build
+###### 4: Local Environment
+	Change database credential in .env file
+	
+	DB_NAME=postgres  
+	DB_USERNAME=postgres  
+	DB_PASSWORD=''  
+	DB_HOST=db  
+	DB_PORT=5432 
+	
+	docker-compose -f docker-compose-local.yml up -d --build
+	
+	Now you can access the server on 8004 port 
